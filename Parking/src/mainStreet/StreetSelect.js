@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -18,7 +19,7 @@ export default class StreetSelect extends Component {
       streetName,
     } = this.props;
     return (
-      <View>
+      <View style={styles.container}>
         <TouchableOpacity
           onPress={openPopup}
         >
@@ -30,3 +31,10 @@ export default class StreetSelect extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 1,
+    borderColor: 'black',
+  }
+})

@@ -16,9 +16,21 @@ export default class Days extends Component {
   //   onChoose: PropTypes.func.isRequired,
   // }
 
+  state = {
+    chosen: [0,0,0,0,0,0,0],
+  }
+
+  onChoose(index) {
+    const { chosen } = this.state;
+    const chosenUpdate = [...chosen];
+    chosenUpdate[index] = !chosen[index];
+    this.setState({
+      chosen: chosenUpdate,
+    });
+  }
+
   render() {
-    const chosen = [0,1,0,1,0,0,0];
-    const onChoose = (index) => index;
+    const { chosen } = this.state; 
     return (
       <View>
         <ScrollView
@@ -29,7 +41,7 @@ export default class Days extends Component {
               <Day 
                 day={day}
                 chosen={!!chosen[index]}
-                onChoose={() => onChoose(index)}
+                onChoose={() => this.onChoose(index)}
               />
             </View>
           )}

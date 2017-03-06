@@ -12,15 +12,17 @@ export default class StreetDisplay extends Component {
     primary: PropTypes.string,
     cross: PropTypes.string,
     openPopup: PropTypes.func.isRequired,
+    primarySelect: PropTypes.bool,
+    primarySelectToggle: PropTypes.func,
   }
 
   render() {
     const {
       primary, 
       cross,
-      setPrimary,
-      setCross,
       openPopup,
+      primarySelect,
+      primarySelectToggle,
     } = this.props;
 
     return (

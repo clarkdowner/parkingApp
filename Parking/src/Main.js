@@ -20,8 +20,9 @@ export default class Main extends Component {
   state = {
     popupIsOpen: false,
     confirmation: false,
-    primary: '',
-    cross: '',
+    primary: 'fake street',
+    cross: 'fake cross',
+    primarySelect: true,
   }
 
   confirmPress = () => {
@@ -31,7 +32,7 @@ export default class Main extends Component {
     this.openPopup();
   }
 
-  openPopup = () => { // why function here??
+  openPopup = () => {
     this.setState({
       popupIsOpen: true,
     });
@@ -58,12 +59,20 @@ export default class Main extends Component {
     })
   }
 
+  primarySelectToggle = () => {
+    this.setState({
+      primarySelect: !this.state.primarySelect,
+    });
+  }
+
   render() {
     const {
       popupIsOpen,
       primary,
       cross,
       confirmation,
+      setPrimary,
+      setCross,
     } = this.state;
     return (
       <View style={styles.container}>
@@ -71,9 +80,9 @@ export default class Main extends Component {
           // streetData={this.props.streetData}
           primary={primary}
           cross={cross}
-          setPrimary={this.setPrimary}
           setCross={this.setCross}
           openPopup={this.openPopup}
+          primarySelectToggle={this.primarySelectToggle}
         />
         <SweepingSelections />
         <TouchableHighlight
@@ -89,6 +98,8 @@ export default class Main extends Component {
           primary={primary}
           cross={cross}
           confirmPark={this.props.parkCar}
+          setPrimary={this.setPrimary}
+          setCross={this.setCross}
         />
       </View>
     );

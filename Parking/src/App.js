@@ -6,6 +6,8 @@ import {
 // import Confirmation from './Confirmation';
 import Home from './Home';
 import Main from './Main';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 export default class App extends Component {
   
@@ -28,12 +30,14 @@ export default class App extends Component {
 
   renderRoot(ComponentToRender) {
     return (
-      <View style={styles.appContainer}>
-        <ComponentToRender 
-          moveCar={this.moveCar}
-          parkCar={this.parkCar}
-        />
-      </View>
+      <Provider store={store}>
+        <View style={styles.appContainer}>
+          <ComponentToRender 
+            moveCar={this.moveCar}
+            parkCar={this.parkCar}
+          />
+        </View>
+      </Provider>
     );
   }
 

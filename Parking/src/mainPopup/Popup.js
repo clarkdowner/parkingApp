@@ -19,6 +19,8 @@ export default class Popup extends Component {
     confirmation: PropTypes.bool.isRequired,
     confirmPark: PropTypes.func.isRequired,
     primary: PropTypes.string,
+    setPrimary: PropTypes.func,
+    setCross: PropTypes.func,
   }
 
   state = {
@@ -46,7 +48,7 @@ export default class Popup extends Component {
     });
   }
 
-  animateClose() {
+  animateClose = () => {
     // slide down first
     Animated.timing(
       this.state.position, { toValue: height} // bottom of screen
@@ -62,6 +64,8 @@ export default class Popup extends Component {
     const {
       primary,
       confirmPark,
+      setPrimary,
+      setCross,
     } = this.props;
     if (confirmation) {
       return (
@@ -72,7 +76,11 @@ export default class Popup extends Component {
       );
     } else {
       return (
-        <SearchModal />
+        <SearchModal
+          setPrimary={setPrimary}
+          setCross={setCross}
+          animateClose={this.animateClose}
+        />
       );
     }
   }

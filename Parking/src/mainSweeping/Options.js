@@ -7,21 +7,30 @@ import Option from './Option'; // need to create
 
 export default class Options extends Component {
 
-  // static propTypes = {
-  //   values: PropTypes.array.isRequired,
-  //   chosen: PropTypes.array.isRequired,
+  static propTypes = {
+    values: PropTypes.array.isRequired,
+  //   chosen: PropTypes.number,
   //   onChoose: PropTypes.func.isRequired,
-  // }
+  }
+
+  state = {
+    chosen: 0,
+  }
+
+  onChoose(index) {
+    this.setState({
+      chosen: index,
+    });
+  }
 
   render() {
-    // const {
-    //   values,
+    const {
+      values,
     //   chosen,
     //   onChoose,
-    // } = this.props;
-    const values = ['Every', '1st and 3rd', '2nd and 4th'];
-    const chosen = [1];
-    const onChoose = (index) => index;
+    } = this.props;
+    const { chosen } = this.state;
+
     return (
       <View>
         <ScrollView
@@ -40,8 +49,8 @@ export default class Options extends Component {
             <View key={index}>
               <Option
                 value={value}
-                chosen={chosen.includes(index)}
-                onChoose={() => onChoose(index)}
+                chosen={chosen === index}
+                onChoose={() => this.onChoose(index)}
               />
             </View>
           )}
