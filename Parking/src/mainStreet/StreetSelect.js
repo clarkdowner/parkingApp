@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -7,18 +7,23 @@ import {
 
 export default class StreetSelect extends Component {
 
-  openStreetSearch() {
-
+  static propTypes = {
+    openPopup: PropTypes.func.isRequired,
+    streetName: PropTypes.string.isRequired,
   }
 
   render() {
+    const {
+      openPopup,
+      streetName,
+    } = this.props;
     return (
       <View>
         <TouchableOpacity
-          onPress={this.openStreetSearch}
+          onPress={openPopup}
         >
           <Text>
-            +
+            { streetName } +
           </Text>
         </TouchableOpacity>
       </View>

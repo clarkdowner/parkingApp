@@ -5,32 +5,55 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { current_parked, street_table } from './data';
 import { defaultStyles } from './styles';
+import { current_parked } from './data';
 
 export default class Home extends Component {
 
   static propTypes = {
-    // need parked data to render
-    parkedData: PropTypes.object.isRequired,
     moveCar: PropTypes.func.isRequired,
   }
 
+  state = {
+    primary: '',
+    cross: '',
+    expireTime: null,
+  }
+
+  componentWillMount() {
+    // get from dataBase
+    const primary = current_parked.on.street_name;
+    const cross = current_parked.at.street_name;
+    const expireTime = current_parked.expire_time;
+    this.setState({
+      primary,
+      cross,
+      expireTime,
+    });
+  }
+
   render() {
-    const { parkedData, moveCar } = this.props;
+    const { moveCar } = this.props;
+    const {
+      primary,
+      cross,
+      expireTime,
+    } = this.state;
 
     return (
-      <View>
-        <Text style={styles.text}>Your car is parked</Text>
-        <Text style={styles.text}>on {parkedData.on.street_name}</Text>
-        <Text style={styles.text}>at {parkedData.at.street_name}</Text>
-        <Text style={styles.text}>and needs to be moved</Text>
-        <Text style={styles.text}>by {parkedData.expire_time}</Text>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.text}>Your car is parked</Text>
+          <Text style={styles.text}>on { primary }</Text>
+          <Text style={styles.text}>at { cross }</Text>
+          <Text style={styles.text}>and needs to be moved</Text>
+          <Text style={styles.text}>by { expireTime }</Text>
+        </View>
         <TouchableHighlight
           style={styles.buttonContainer}
           onPress={moveCar}
         >
-          <Text style={styles.buttonText}>Moved It</Text>
+          <Text style={styles.buttonText}>Update</Text>
         </TouchableHighlight>
       </View>
     );
@@ -38,6 +61,9 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    ...defaultStyles.appContainer,
+  },
   buttonContainer: {
     ...defaultStyles.button,
   },

@@ -5,23 +5,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { defaultStyles } from './styles';
+import { defaultStyles } from '../styles';
 
 export default class Confirmation extends Component {
 
   static propTypes = {
     primary: PropTypes.string,
+    confirmPark: PropTypes.func.isRequired,
   }
 
   render() {
+    const {
+      primary,
+      confirmPark,
+    } = this.props;
     return (
       <View>
         <Text>
-          Your car is parked on { this.props.primary }
+          Your car is parked on { primary }
         </Text>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={this.confirmPark}
+          onPress={confirmPark}
         >
           <Text>Done</Text>
         </TouchableOpacity>

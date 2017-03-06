@@ -9,7 +9,7 @@ import Day from './Day';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-export default class DaysSelector extends Component {
+export default class Days extends Component {
 
   // static propTypes = {
   //   chosen: PropTypes.array.isRequired,

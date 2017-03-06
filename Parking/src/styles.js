@@ -9,5 +9,11 @@ export const defaultStyles = {
     paddingHorizontal: 15,
     alignItems: 'center',
     margin: 15,
+    marginTop: 30,
+  },
+  appContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 };

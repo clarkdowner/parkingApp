@@ -3,16 +3,16 @@ import {
   Text,
   View,
 } from 'react-native';
-import DaysSelector from './DaysSelector';
+import Days from './Days';
 import Options from './Options';
 
-export default class ParkSweepingSelect extends Component {
+export default class SweepingSelections extends Component {
   render() {
     return (
       <View>
         <Text>with Street Sweeping: </Text>
         <Options />
-        <DaysSelector />
+        <Days />
         <Options />
       </View>
     );
