@@ -4,30 +4,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class Street extends Component {
+const Street = ({ streetName, setStreet, closePopup }) => (
+  <TouchableOpacity onPress={() => { setStreet(streetName); closePopup(); }} style={{flex: 1}}>
+    <Text>{ streetName }</Text>
+  </TouchableOpacity>
+)
 
-  static propTypes = {
-    setStreet: PropTypes.func.isRequired,
-    streetName: PropTypes.string.isRequired,
-    animateClose: PropTypes.func.isRequired,
-  }
-
-  setStreetAndClosePopup() {
-    this.props.setStreet();
-    // close popup
-    this.props.animateClose();
-  }
-
-  render() {
-    const {
-      // setStreet,
-      streetName,
-    } = this.props;
-    return (
-      <TouchableOpacity onPress={() => this.setStreetAndClosePopup()} style={{flex: 1}}>
-        <Text>{ streetName }</Text>
-      </TouchableOpacity>
-    );
-  }
-
+Street.propTypes = {
+ streetName: PropTypes.string.isRequired,
+ // setStreetAndClosePopup: PropTypes.func.isRequired, 
+ setStreet: PropTypes.func.isRequired,
+ closePopup: PropTypes.func.isRequired,
 }
+
+export default Street

@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Animated,
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
+const { width } = Dimensions.get('window');
+
 const colorDefault = 'rgba(255, 255, 255, 1)'; // white
-const colorSelected = 'rgba(103,58,183, 1)'; // purple
+const colorSelected = 'darkgray' //'rgba(103,58,183, 1)'; // purple
 
 export default class Option extends Component {
 
@@ -63,6 +66,7 @@ export default class Option extends Component {
 
     return (
       <TouchableOpacity
+        style={{borderWidth: 1, borderColor: 'orange'}}
         activeOpacity={1} // TRY COMMENTING THIS OUT TO SEE WHAT IT DOES
         onPress={onChoose}
       >
@@ -87,7 +91,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
-    marginRight: 10,
+    marginRight: 300,
+    // marginLeft: 10,
     width: 110,
+    // width: (width / 3) - 10;
   },
 });

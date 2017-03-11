@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  Dimensions,
   ScrollView,
+  StyleSheet,
   View,
 } from 'react-native';
-import Option from './Option'; // need to create
+import Option from './Option';
+
+const { width } = Dimensions.get('window');
+const optionWidth = (width) / 3 - 10;
 
 export default class Options extends Component {
 
   static propTypes = {
     values: PropTypes.array.isRequired,
-  //   chosen: PropTypes.number,
-  //   onChoose: PropTypes.func.isRequired,
   }
 
   state = {
@@ -26,13 +29,11 @@ export default class Options extends Component {
   render() {
     const {
       values,
-    //   chosen,
-    //   onChoose,
     } = this.props;
     const { chosen } = this.state;
 
     return (
-      <View>
+      <View style={styles.container}>
         <ScrollView
           horizontal={true}
           // decelerate after user lifts finger
@@ -40,13 +41,14 @@ export default class Options extends Component {
           // hide scroll indicators
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          // // do not adjust content automatically
-          // automaticallyAdjustContentInsets={false}
-          // // snap insterval to stop at option edges
-          // snapToInterval={optionWidth}
+          // do not adjust content automatically
+          automaticallyAdjustContentInsets={false}
+          // snap insterval to stop at option edges
+          snapToInterval={optionWidth}
+          style={styles.options}
         >
           {values.map((value, index) =>
-            <View key={index}>
+            <View key={index} style={{ width: optionWidth }}>
               <Option
                 value={value}
                 chosen={chosen === index}
@@ -59,3 +61,17 @@ export default class Options extends Component {
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+    marginBottom: 20,
+    borderWidth: 1, 
+    borderColor: 'green',
+  },
+  options: {
+    flexDirection: 'row',
+    marginRight: -300,
+  },
+});

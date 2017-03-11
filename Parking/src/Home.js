@@ -42,7 +42,7 @@ export default class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.mainText}>
           <Text style={styles.text}>Your car is parked</Text>
           <Text style={styles.text}>on { primary }</Text>
           <Text style={styles.text}>at { cross }</Text>
@@ -72,7 +72,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...defaultStyles.text,
-    color: 'white',
-    fontSize: 18,
+    ...defaultStyles.buttonText,
+  },
+  mainText: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 160,
   },
 })

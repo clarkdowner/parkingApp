@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { street_table } from '../data';
@@ -11,10 +12,8 @@ import Street from './Street';
 export default class SearchModal extends Component {
 
   static propTypes = {
-    setPrimary: PropTypes.func,
-    setCross: PropTypes.func,
-    primary: PropTypes.bool, // use when Redux is brought in
-    animateClose: PropTypes.func,
+    setStreet: PropTypes.func,
+    closePopup: PropTypes.func,
   }
   
   state = {
@@ -57,27 +56,32 @@ export default class SearchModal extends Component {
       userFilteredStreets,
     } = this.state;
     const { 
-      setPrimary,
-      setCross,
-      animateClose,
+      setStreet,
+      closePopup,
     } = this.props;
-    //const setStreet = primary ? setPrimary : setCross;
 
     return (
       <View style={styles.container}>
-        <TextInput
-          {...this.props}
-          style={[styles.text, styles.textInput]}
-          value={searchTerm}
-          onChange={this.handleTextChange}
-        />
-        {/* add button here with onPress={setPrimary(searchTerm)} */}
+        <View>
+          <TextInput
+            {...this.props}
+            placeholder='Street Name'
+            style={[styles.text, styles.textInput]}
+            value={searchTerm}
+            onChange={this.handleTextChange}
+          />
+          <TouchableOpacity
+            onPress={() => { setStreet(searchTerm); closePopup() }}
+          >
+            <Text>+</Text>
+          </TouchableOpacity>
+        </View>
         {userFilteredStreets.map((street, index) => 
           <View key={index} style={{height: 40, backgroundColor: 'red', borderWidth: 2}}>
             <Street
-              setStreet={() => setPrimary(street)}
               streetName={street}
-              animateClose={animateClose}
+              setStreet={setStreet}
+              closePopup={closePopup}
             />
           </View>
         )}
@@ -85,7 +89,6 @@ export default class SearchModal extends Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

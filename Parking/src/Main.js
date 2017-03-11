@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
-  // TextInput,
   TouchableHighlight,
   View,
 } from 'react-native';
 import { defaultStyles } from './styles';
-import StreetDisplay from './mainStreet/StreetDisplay';
-import SweepingSelections from './mainSweeping/SweepingSelections';
+import StreetDisplay from './mainText/TextDisplay';
+import SweepingSelections from './mainOptions/SweepingSelections';
 import Popup from './mainPopup/Popup';
 
 export default class Main extends Component {
@@ -20,8 +19,8 @@ export default class Main extends Component {
   state = {
     popupIsOpen: false,
     confirmation: false,
-    primary: 'fake street',
-    cross: 'fake cross',
+    primary: '',
+    cross: '',
     primarySelect: true,
   }
 
@@ -45,6 +44,10 @@ export default class Main extends Component {
     });
   }
 
+  setStreet = (streetName) => {
+    this.state.primarySelect ? this.setPrimary(streetName) : this.setCross(streetName);
+  }
+
   setPrimary = (streetName) => {
     const primary = streetName;
     this.setState({
@@ -59,9 +62,9 @@ export default class Main extends Component {
     })
   }
 
-  primarySelectToggle = () => {
+  primarySelectToggle = (bool) => {
     this.setState({
-      primarySelect: !this.state.primarySelect,
+      primarySelect: bool,
     });
   }
 
@@ -71,35 +74,33 @@ export default class Main extends Component {
       primary,
       cross,
       confirmation,
-      setPrimary,
-      setCross,
+      setStreet,
     } = this.state;
     return (
       <View style={styles.container}>
         <StreetDisplay 
-          // streetData={this.props.streetData}
           primary={primary}
           cross={cross}
-          setCross={this.setCross}
           openPopup={this.openPopup}
           primarySelectToggle={this.primarySelectToggle}
         />
         <SweepingSelections />
         <TouchableHighlight
+          underlayColor='#99d9f4'
           style={styles.buttonContiner}
           onPress={this.confirmPress}
         >
-          <Text style={styles.buttonText}>Repark</Text>
+          <Text style={styles.buttonText}>Park</Text>
         </TouchableHighlight>
         <Popup
           isOpen={popupIsOpen}
           closePopup={this.closePopup}
+          openPopup={this.openPopup}
           confirmation={confirmation}
           primary={primary}
           cross={cross}
           confirmPark={this.props.parkCar}
-          setPrimary={this.setPrimary}
-          setCross={this.setCross}
+          setStreet={this.setStreet}
         />
       </View>
     );
@@ -115,7 +116,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...defaultStyles.text,
-    color: 'white',
-    fontSize: 18,
+    ...defaultStyles.buttonText,
   },
 })

@@ -11,11 +11,6 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 export default class Days extends Component {
 
-  // static propTypes = {
-  //   chosen: PropTypes.array.isRequired,
-  //   onChoose: PropTypes.func.isRequired,
-  // }
-
   state = {
     chosen: [0,0,0,0,0,0,0],
   }
@@ -32,7 +27,7 @@ export default class Days extends Component {
   render() {
     const { chosen } = this.state; 
     return (
-      <View>
+      <View style={{ alignItems: 'center', paddingLeft: 5 }}>
         <ScrollView
           horizontal={true}
         >

@@ -7,7 +7,14 @@ import {
 import Home from './Home';
 import Main from './Main';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { createStore, applyMiddleware } from 'redux';
+import { reducer, apiMiddleWare } from './redux';
+
+// create redux store
+const store = createStore(reducer, {}, applyMiddleware(apiMiddleWare));
+
+// fetch parked data
+store.dispatch({type: 'GET_PARKED_DATA'});
 
 export default class App extends Component {
   
@@ -53,5 +60,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'space-between',
     flex: 1,
+    marginBottom: 20,
   },
 })
